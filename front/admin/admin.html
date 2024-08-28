@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regras do administrador</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=New+Amsterdam&display=swap" rel="stylesheet">
+    <link rel="icon" href="favicon.png" type="image/png">
+</head>
+
+<body>
+    <div class="titulo">Regras do administrador</div>
+    <div class="totalusuarios"> Usuário ativos - 0</div>
+
+    <div class="configuracao">
+        Configurações
+    </div>
+
+    <div class="configuracaoItem">
+        <div class="configuracaoItemTitulo">⏳ Duração mínima do turno do jogador</div>
+        <div>
+            <p class="frase">Cada jogador tem no mínimo esse tempo antes da bomba explodir. O valor é referente em
+                segundos</p>
+            <div class="slider">
+                <div id="tempo" class="valorInput"></div>
+                <input id="tempo" type="range" min="5" max="60" oninput="updateInputValue(this)">
+            </div>
+        </div>
+    </div>
+
+    <div class="configuracaoItem">
+        <div class="configuracaoItemTitulo">❤️ Quantidade de vidas por jogador</div>
+        <div>
+            <p class="frase">Cada jogador pode errar dependendo da quantidade de vidas.</p>
+            <div class="slider">
+                <div id="vidas" class="valorInput"></div>
+                <input id="vidas" type="range" min="1" max="10" oninput="updateInputValue(this)">
+            </div>
+        </div>
+    </div>
+
+    <div class="configuracaoItem">
+        <div class="configuracaoItemTitulo">👨🏻‍🦳👩🏻 Número de jogadores</div>
+        <div>
+            <p class="frase">Quantidade máxima de jogadores na partida.</p>
+            <div class="slider">
+                <div id="jogadores" class="valorInput"></div>
+                <input id="jogadores" type="range" min="2" max="50" oninput="updateInputValue(this)">
+            </div>
+        </div>
+    </div>
+
+    <div class="configuracaoItem">
+        <div class="configuracaoItemTitulo">🎮 Jogo ativo</div>
+        <div>
+            <p class="frase">Desabilitar caso necessite pausar o jogo. Senão o jogo começará quando houver o mínimo de
+                jogadores para próxima rodada.</p>
+            <div class="slider">
+                <label class="switch">
+                    <input id="jogoAtivo" type="checkbox">
+                    <span class="sliderCheck round"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="admin.js"></script>
+</body>
+
+</html>

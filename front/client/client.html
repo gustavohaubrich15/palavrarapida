@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palavra rápida</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=New+Amsterdam&display=swap" rel="stylesheet">
+    <link rel="icon" href="favicon.png" type="image/png">
+</head>
+
+<body>
+    <div class="titulo">Palavra rápida</div>
+
+    <div class="form-initial">
+        <div class="form-container" id="nameFormContainer">
+            <h2>Digite seu nome para começar</h2>
+            <input id="usernameInput" type="text" placeholder="" maxlength="12">
+            <button class="confirmName" type="submit">Confirmar</button>
+            <span id="errorInitialName"></span>
+            <span id="userName"></span>
+        </div>
+    </div>
+
+    <div id="gameArea" style="display: none;">
+        <div class="topPlayers"></div>
+        <div class="midfield">
+            <div class="leftPlayers"></div>
+            <div class="bomb-container">
+                <div style="display: none;" class="bomb"></div>
+                <img style="display: none;" src="./img/flecha.png" class="arrow" alt="flecha">
+                <div style="text-align: center;" class="waitNewRound">Aguarde a <br />próxima rodada......</div>
+            </div>
+            <div class="rightPlayers"></div>
+        </div>
+        <div class="bottomPlayers"></div>
+
+        <div class="players"></div>
+        <div style="height: 10%;"></div>
+        <input id="answerInput" class="answerInput" style="width: 80%;" type="text" placeholder="" disabled>
+    </div>
+
+    <div class="championshipArea" style="display: none;">
+        <div style="text-align: center;" class="champion"></div>
+        <button class="confirmName" style="font-size: medium; width: 90%;" type="submit">Jogar novamente</button>
+        
+    </div>
+
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="client.js"></script>
+</body>
+
+</html>
