@@ -148,6 +148,7 @@ const startGame = (newGame, idSocket) => {
 const disableAllPlayersThatNotAnswer = (newGame, idSocket) => {
     const input = document.getElementById(`${idSocket}answerinput`);
     input.disabled = newGame.jogadores[newGame.turnoIndexJogador].id != idSocket
+    input.value = ''
 }
 
 const arrowDirection = (newGame) =>{

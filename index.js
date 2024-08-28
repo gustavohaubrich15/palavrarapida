@@ -59,7 +59,7 @@ io.on('connection', (socket) => {
         const client = clients.find(c => c.id === socket.id);
         if (client && client.role == 'admin') {
             configurations = newConfigurations;
-            io.emit('receive-admin-configurations', configurations);
+            socket.broadcast.emit('receive-admin-configurations', configurations);
         }
         startGame()
     });
