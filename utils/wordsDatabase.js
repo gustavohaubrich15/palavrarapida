@@ -2,7 +2,7 @@ const fs = require('fs').promises; // Importando a versão Promises do módulo f
 
 const wordsDatabase = async () => {
     try {
-        const filePath = __dirname+'\\words.txt';
+        const filePath = __dirname+'/words.txt';
         const data = await fs.readFile(filePath, 'utf8');
         
         const words = data.split('\n').map(line => line.trim());
