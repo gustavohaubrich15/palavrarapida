@@ -1,9 +1,9 @@
 const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
-const wordsDatabase = require('./utils/wordsDatabase');
-const getTwoSyllableWord = require('./utils/getTwoSyllabeWord');
-const findWords = require('./utils/findWords');
+const wordsDatabase = require(__dirname +'/utils/wordsDatabase');
+const getTwoSyllableWord = require(__dirname +'/utils/getTwoSyllabeWord');
+const findWords = require(__dirname +'/utils/findWords');
 
 
 const app = express();
