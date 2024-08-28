@@ -35,7 +35,7 @@ startedWords()
 let clients = [];
 let words = [];
 let configurations = {
-    tempo: 5,
+    tempo: 7,
     vidas: 2,
     maxJogadores: 6,
     jogoAtivo: true
@@ -64,9 +64,7 @@ io.on('connection', (socket) => {
         startGame()
     });
    
-    if(configurations.jogoAtivo){
-        startGame();
-    }
+    startGame()
     
     //Recebendo mensagens do cliente
     socket.on('answer-question', (answer) => {
@@ -74,8 +72,10 @@ io.on('connection', (socket) => {
             const randomWord = getTwoSyllableWord(words);
             answer.game.silaba = randomWord;
             passTurn(answer.game)
-            game = answer.game
-            io.emit('next-turn-player-game', answer.game)
+            if(configurations.jogoAtivo){
+                game = answer.game
+                io.emit('next-turn-player-game', answer.game)
+            }
         }
     });
 
@@ -120,7 +120,6 @@ const startGame = () =>{
         jogadores: shuffledJogadores,
         turnoIndexJogador: 0
     }
-    console.log('startgame')
     io.emit('game-start', game);
     resetBombTimer()
 }
@@ -135,9 +134,19 @@ const passTurn = (game) => {
     game.turnoIndexJogador = proxTurnoIndex;
 
     justActivePlayerWithLives = game.jogadores.filter((jogador, index)=>{ return jogador.vidas > 0})
+    console.log(`Turno passado para: ${game.jogadores[game.turnoIndexJogador].name}  - Vidas:${game.jogadores[game.turnoIndexJogador].vidas}`);
 
     if (justActivePlayerWithLives.length == 1) {
-        io.emit('champion-user', game.jogadores[proxTurnoIndex].name)
+        setChampionPlayer(game.jogadores[proxTurnoIndex].name)
+        return
+    }
+    const randomWord = getTwoSyllableWord(words);
+    game.silaba = randomWord;
+    resetBombTimer()
+};
+
+const setChampionPlayer = (playerName) =>{
+    io.emit('champion-user', playerName)
         game = null
         if (timer) {
             clearTimeout(timer);
@@ -150,14 +159,10 @@ const passTurn = (game) => {
                 }
             }
         });
-        clients = clients.filter(client => client.role == 'admin');
-        configurations.jogoAtivo = false
-        io.emit('receive-admin-configurations', configurations);
-        return
-    }
-    resetBombTimer()
-    console.log(`Turno passado para: ${game.jogadores[game.turnoIndexJogador].name}`);
-};
+    clients = clients.filter(client => client.role == 'admin');
+    configurations.jogoAtivo = false
+    io.emit('receive-admin-configurations', configurations);
+}
 
 const resetBombTimer = () => {
     if (timer) {
@@ -172,7 +177,9 @@ const resetBombTimer = () => {
 const bombExplode = ()=>{
     game.jogadores[game.turnoIndexJogador].vidas -= 1;
     passTurn(game);
-    io.emit('next-turn-player-game', game);
+    if(configurations.jogoAtivo){
+        io.emit('next-turn-player-game', game);
+    }
 }
 
 const totalUsuarios = () =>{

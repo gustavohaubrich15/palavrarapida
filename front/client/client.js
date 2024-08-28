@@ -118,7 +118,7 @@ const socketEvents = () => {
         answerInput.id = socket.id + 'answerinput';
         game = newGame
         addUserToBombArea(newGame.jogadores, false)
-        startGame(newGame, socket.id)
+        disableAllPlayersThatNotAnswer(newGame, socket.id)
         arrowDirection(newGame)
     });
 
@@ -139,10 +139,6 @@ const socketEvents = () => {
         championshipArea.style.display = 'flex';
         champion.textContent = `Vencedor : ${name}`
     });
-}
-
-const startGame = (newGame, idSocket) => {
-    disableAllPlayersThatNotAnswer(newGame, idSocket)
 }
 
 const disableAllPlayersThatNotAnswer = (newGame, idSocket) => {
@@ -177,9 +173,16 @@ const arrowDirection = (newGame) =>{
 
 const updateLives = (newGame) =>{
     newGame.jogadores.forEach((jogador, index)=>{
-        const lives = document.getElementById(`${jogador.id}lives`);
+        const lives = document.querySelectorAll(`#${jogador.id}lives`);
         
-        console.log(lives)
+        if (lives.length > jogador.vidas) {
+            for (let i = lives.length; i > jogador.vidas; i--) {
+                lives[i - 1].remove();
+                if(i == 1){
+
+                }
+            }
+        }
     })
 }
 
