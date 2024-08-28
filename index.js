@@ -10,7 +10,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
-app.use(express.static('front'));
+app.use(express.static(__dirname + '/front'));
 
 // Rota para página do admin
 app.get('/admin', (req, res) => {
