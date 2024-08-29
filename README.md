@@ -1,4 +1,4 @@
-# Palavras Rápidas
+# Palavras Rápidas - Web Mobile
 
 
 &nbsp;
