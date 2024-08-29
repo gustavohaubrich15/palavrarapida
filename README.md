@@ -14,7 +14,7 @@
 * [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) - Frontend - Estilização CSS
 * [Socket.io](https://socket.io/pt-br/) - WebSocket
 * [NodeJS](https://nodejs.org/en) - NodeJs - Backend
-* 
+  
 ![image](https://github.com/user-attachments/assets/a52c9259-fa35-474f-ae75-ad1d910ddcc1)
 
 
