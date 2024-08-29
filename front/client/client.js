@@ -80,8 +80,12 @@ const addUserToBombArea = (usuarios, lobby) => {
     rightPlayers.innerHTML = '';
     bottomPlayers.innerHTML = '';
 
+    let divisionPlayers = totalUsers > 3 ? 4 : totalUsers;
+  
+    const topCount = Math.ceil(totalUsers / divisionPlayers);
+    const rightCount = topCount + Math.ceil(totalUsers / divisionPlayers);
+    const bottomCount = rightCount + Math.floor(totalUsers / divisionPlayers);
 
-    let lado = 1
     usuarios.forEach((user, index) => {
         const playerElement = document.createElement('div');
         playerElement.className = 'player';
@@ -105,20 +109,14 @@ const addUserToBombArea = (usuarios, lobby) => {
         `;
         }
 
-        if (lado == 1) {
+        if (index < topCount) {
             topPlayers.appendChild(playerElement);
-        } else if (lado == 2) {
-            leftPlayers.appendChild(playerElement);
-        } else if (lado == 3) {
+        } else if (index < rightCount) {
             rightPlayers.appendChild(playerElement);
-        } else {
+        } else if (index < bottomCount) {
             bottomPlayers.appendChild(playerElement);
-        }
-
-        if (lado == 4) {
-            lado = 0;
         } else {
-            lado++;
+            leftPlayers.prepend(playerElement);
         }
     });
 };
@@ -155,11 +153,9 @@ const socketEvents = () => {
     });
 
     socket.on('champion-user', (name) => {
-        setTimeout(() => {
-            gameArea.style.display = 'none';
-            championshipArea.style.display = 'flex';
-            champion.textContent = `Vencedor : ${name}`;
-        }, 1500);
+        gameArea.style.display = 'none';
+        championshipArea.style.display = 'flex';
+        champion.textContent = `Vencedor : ${name}`;
     });
 }
 
@@ -178,7 +174,7 @@ const arrowDirection = (newGame) =>{
         if (index == newGame.turnoIndexJogador) {
 
             if (playerParent.closest('.topPlayers')) {
-                rotationAngle = 360; 
+                rotationAngle = 0; 
             } else if (playerParent.closest('.bottomPlayers')) {
                 rotationAngle = 180; 
             } else if (playerParent.closest('.leftPlayers')) {
@@ -201,7 +197,7 @@ const updateLives = (newGame) =>{
             for (let i = lives.length; i > jogador.vidas; i--) {
                 const playerParent = lives[i - 1].parentNode 
                 lives[i - 1].remove();
-                loseLiveAudio.play()
+                //loseLiveAudio.play()
                 if(i == 1){
                     const deathElement = document.createElement('div');
                     deathElement.className = 'death';
