@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <div class="titulo">Palavra rápida</div>
+    <div class="title">Palavra rápida</div>
 
     <div class="form-initial">
         <div class="form-container" id="nameFormContainer">
@@ -23,6 +23,11 @@
             <span id="errorInitialName"></span>
             <span id="userName"></span>
         </div>
+    </div>
+    
+    <div style="text-align: center;" id="lobbyTitle" class="lobby">Total de jogadores na sala - 0</div>
+    <div id="lobby" class="lobby">
+       
     </div>
 
     <div id="gameArea" style="display: none;">
@@ -37,7 +42,6 @@
             <div class="rightPlayers"></div>
         </div>
         <div class="bottomPlayers"></div>
-
         <div class="players"></div>
         <div style="height: 10%;"></div>
         <input id="answerInput" class="answerInput" style="width: 80%;" type="text" placeholder="" disabled>
@@ -46,10 +50,9 @@
     <div class="championshipArea" style="display: none;">
         <div style="text-align: center;" class="champion"></div>
         <button class="confirmName" style="font-size: medium; width: 90%;" type="submit">Jogar novamente</button>
-        
     </div>
 
-
+    <audio style="display: none;" id="loseLiveAudio" src="audio/faustao-errou.mp3"></audio>
     <script src="/socket.io/socket.io.js"></script>
     <script src="client.js"></script>
 </body>

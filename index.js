@@ -37,7 +37,7 @@ let words = [];
 let configurations = {
     tempo: 7,
     vidas: 2,
-    maxJogadores: 6,
+    minJogadores: 3,
     jogoAtivo: true
 };
 let timer = null;
@@ -98,7 +98,7 @@ const verifyCorrectAnswer = (answer, socketId) =>{
 
 const startGame = () =>{
     let allClients = clients.filter(client => client.role != 'admin');
-    if(allClients.length < 2) return;
+    if(allClients.length < configurations.minJogadores) return;
     if(!configurations.jogoAtivo) return;
 
     const randomWord = getTwoSyllableWord(words);

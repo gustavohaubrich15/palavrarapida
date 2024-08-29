@@ -7,7 +7,7 @@ const socket = io({
 let configurationParam = {
     tempo: 0,
     vidas: 0,
-    jogadores: 0,
+    minJogadores: 0,
     jogoAtivo: false
 }
 const checkboxJogoAtivo = document.querySelector('#jogoAtivo');
@@ -27,8 +27,8 @@ const updateInputValue = (element, initValue) => {
             configurationParam.tempo = element.value;
         } else if (element.id === 'vidas') {
             configurationParam.vidas = element.value;
-        } else if (element.id === 'jogadores') {
-            configurationParam.jogadores = element.value;
+        } else if (element.id === 'minJogadores') {
+            configurationParam.minJogadores = element.value;
         }
         updateAdminConfigurations()
     }
@@ -43,8 +43,8 @@ const initializeSlidersAndCheckbox = (configurations) => {
             configValue = configurations.tempo;
         } else if (slider.id === 'vidas') {
             configValue = configurations.vidas;
-        } else if (slider.id === 'jogadores') {
-            configValue = configurations.jogadores;
+        } else if (slider.id === 'minJogadores') {
+            configValue = configurations.minJogadores;
         }
         updateInputValue(slider, configValue);
     });

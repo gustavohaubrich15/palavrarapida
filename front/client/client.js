@@ -15,8 +15,25 @@ const answerInputClass = document.querySelector('.answerInput');
 const arrow = document.querySelector('.arrow');
 const championshipArea = document.querySelector('.championshipArea');
 const champion = document.querySelector('.champion');
+const lobby = document.querySelector('#lobby')
+const lobbyTitle = document.querySelector('#lobbyTitle')
 
 
+let socketTotalUsuarios = io({
+    query: {
+        role: 'admin',
+        name: ''
+    }
+})
+
+socketTotalUsuarios.on('totalUsuarios', (usuarios) => {
+    let users = ''
+    usuarios.forEach((usuario)=>{
+        users += `<div>${usuario.name}</div>`
+    })
+    lobby.innerHTML = users;
+    lobbyTitle.textContent = `Total de jogadores na sala - ${usuarios.length}`
+});
 
 let socket;
 let game;
@@ -35,6 +52,9 @@ buttonsConfirmName.forEach((button)=>{
             waitNewRound.style.display = 'flex';
             bomb.style.display = 'none';
             arrow.style.display = 'none';
+            lobby.style.display = 'none';
+            lobbyTitle.style.display = 'none';
+            socketTotalUsuarios.disconnect()
             socket = io({
                 query: {
                     role: 'client',
@@ -135,6 +155,7 @@ const socketEvents = () => {
     });
 
     socket.on('champion-user', (name) => {
+        setTimeout(()=>{}, 1500)
         gameArea.style.display = 'none';
         championshipArea.style.display = 'flex';
         champion.textContent = `Vencedor : ${name}`
@@ -155,7 +176,6 @@ const arrowDirection = (newGame) =>{
 
         if (index == newGame.turnoIndexJogador) {
 
-            
             if (playerParent.closest('.topPlayers')) {
                 rotationAngle = 360; 
             } else if (playerParent.closest('.bottomPlayers')) {
@@ -172,14 +192,19 @@ const arrowDirection = (newGame) =>{
 }
 
 const updateLives = (newGame) =>{
+    const loseLiveAudio = document.querySelector('#loseLiveAudio')
     newGame.jogadores.forEach((jogador, index)=>{
         const lives = document.querySelectorAll(`#${jogador.id}lives`);
         
         if (lives.length > jogador.vidas) {
             for (let i = lives.length; i > jogador.vidas; i--) {
+                const playerParent = lives[i - 1].parentNode 
                 lives[i - 1].remove();
+                loseLiveAudio.play()
                 if(i == 1){
-
+                    const deathElement = document.createElement('div');
+                    deathElement.className = 'death';
+                    playerParent.appendChild(deathElement)
                 }
             }
         }
