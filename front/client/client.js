@@ -96,7 +96,7 @@ const addUserToBombArea = (usuarios, lobby) => {
 
             let livesHTML = `<div style="display: flex; justify-content: space-between;">`
             for (let i = 0; i < user.vidas; i++) {
-                livesHTML += `<div id="${user.id}lives" class="lives"></div>`
+                livesHTML += `<div  class="lives ${user.id}lives"></div>`
             }
             livesHTML += '</div>'
             playerElement.innerHTML += livesHTML + `
@@ -155,10 +155,11 @@ const socketEvents = () => {
     });
 
     socket.on('champion-user', (name) => {
-        setTimeout(()=>{}, 1500)
-        gameArea.style.display = 'none';
-        championshipArea.style.display = 'flex';
-        champion.textContent = `Vencedor : ${name}`
+        setTimeout(() => {
+            gameArea.style.display = 'none';
+            championshipArea.style.display = 'flex';
+            champion.textContent = `Vencedor : ${name}`;
+        }, 1500);
     });
 }
 
@@ -194,7 +195,7 @@ const arrowDirection = (newGame) =>{
 const updateLives = (newGame) =>{
     const loseLiveAudio = document.querySelector('#loseLiveAudio')
     newGame.jogadores.forEach((jogador, index)=>{
-        const lives = document.querySelectorAll(`#${jogador.id}lives`);
+        const lives = document.getElementsByClassName(`${jogador.id}lives`);
         
         if (lives.length > jogador.vidas) {
             for (let i = lives.length; i > jogador.vidas; i--) {
