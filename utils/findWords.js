@@ -1,5 +1,5 @@
 const findWords = (userWord,syllable, words) => {
-    return lower(userWord).includes(syllable) && words.includes(lower(userWord))
+    return userWord.toLowerCase().includes(syllable) && words.includes(userWord.toLowerCase())
  };
 
  module.exports = findWords;
