@@ -211,7 +211,7 @@ const updateLives = (newGame) =>{
             for (let i = lives.length; i > jogador.vidas; i--) {
                 const playerParent = lives[i - 1].parentNode 
                 lives[i - 1].remove();
-                loseLiveAudio.play()
+                //loseLiveAudio.play()
                 if(i == 1){
                     const deathElement = document.createElement('div');
                     deathElement.className = 'death';
@@ -236,6 +236,15 @@ answerInputClass.addEventListener('keydown', (event) => {
         socket.emit('answer-question', {
             word: event.target.value,
             game: game
+        },(response) => {
+            if (response.wrongAnswer) {
+                const playerElement = document.getElementById(`${socket.id}onlineAnswer`).parentNode;
+                playerElement.classList.add('shake');
+
+                setTimeout(() => {
+                    playerElement.classList.remove('shake');
+                }, 500); 
+            } 
         });
     }
 });

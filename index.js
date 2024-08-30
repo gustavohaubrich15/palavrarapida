@@ -67,7 +67,7 @@ io.on('connection', (socket) => {
     startGame()
     
     //Recebendo mensagens do cliente
-    socket.on('answer-question', (answer) => {
+    socket.on('answer-question', (answer, callback) => {
         if(verifyCorrectAnswer(answer, socket.id)){
             const randomWord = getTwoSyllableWord(words);
             answer.game.silaba = randomWord;
@@ -76,6 +76,10 @@ io.on('connection', (socket) => {
                 game = answer.game
                 io.emit('next-turn-player-game', answer.game)
             }
+        }else{
+            callback({
+                wrongAnswer: true
+            });
         }
     });
 
