@@ -91,7 +91,11 @@ io.on('connection', (socket) => {
 
 
 const verifyCorrectAnswer = (answer, socketId) =>{
+    console.log('id:'+socketId)
+    console.log('idTurno:'+answer.game.jogadores[answer.game.turnoIndexJogador].id)
     if(answer.game.jogadores[answer.game.turnoIndexJogador].id != socketId) return false;
+    console.log('resposta do usuário'+answer.word )
+    console.log('certa?'+ findWords(answer.word,answer.game.silaba, words))
     return findWords(answer.word,answer.game.silaba, words);
 }
 

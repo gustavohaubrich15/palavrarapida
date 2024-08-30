@@ -172,6 +172,9 @@ const disableAllPlayersThatNotAnswer = (newGame, idSocket) => {
     const input = document.getElementById(`${idSocket}answerinput`);
     input.disabled = newGame.jogadores[newGame.turnoIndexJogador].id != idSocket
     input.value = ''
+    if(!input.disabled){
+        input.focus();
+    }
 }
 
 const arrowDirection = (newGame) =>{
@@ -218,7 +221,7 @@ const updateLives = (newGame) =>{
 }
 
 answerInputClass.addEventListener('keydown', (event) => {
-    if (event.key == 13) {
+    if (event.keyCode == 13) {
         event.preventDefault();
         socket.emit('answer-question', {
             word: event.target.value,
