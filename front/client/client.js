@@ -162,6 +162,7 @@ const socketEvents = () => {
     });
 
     socket.on('champion-user', (name) => {
+        answerInput.value = ''
         gameArea.style.display = 'none';
         championshipArea.style.display = 'flex';
         champion.textContent = `Vencedor : ${name}`;
