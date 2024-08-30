@@ -239,6 +239,13 @@ answerInputClass.addEventListener('input', (event) => {
     });
 });
 
+answerInputClass.addEventListener('keyup', (event) => {
+    socket.emit('answer-live', {
+        typing: event.target.value,
+        idSocket: socket.id,
+        silaba: game.silaba
+    });
+});
 
 const updateAnswerPlayer = (answerLive) => {
     const answerInputClass = document.getElementById(`${answerLive.idSocket}onlineAnswer`);
