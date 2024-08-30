@@ -100,6 +100,7 @@ const startGame = () =>{
     let allClients = clients.filter(client => client.role != 'admin');
     if(allClients.length < configurations.minJogadores) return;
     if(!configurations.jogoAtivo) return;
+    if(game != null) return;
 
     const randomWord = getTwoSyllableWord(words);
 
@@ -120,6 +121,7 @@ const startGame = () =>{
         jogadores: shuffledJogadores,
         turnoIndexJogador: 0
     }
+    totalUsuarios()
     io.emit('game-start', game);
     resetBombTimer()
 }
@@ -183,7 +185,7 @@ const bombExplode = ()=>{
 }
 
 const totalUsuarios = () =>{
-    io.emit('totalUsuarios', clients.filter(client => client.role != 'admin'));
+    io.emit('totalUsuarios', clients.filter(client => client.role != 'admin'), game);
 }
 
 const PORT = process.env.PORT || 3000;

@@ -17,6 +17,7 @@ const championshipArea = document.querySelector('.championshipArea');
 const champion = document.querySelector('.champion');
 const lobby = document.querySelector('#lobby')
 const lobbyTitle = document.querySelector('#lobbyTitle')
+const lobbyStatusGame = document.querySelector('#lobbyStatusGame')
 
 
 let socketTotalUsuarios = io({
@@ -26,22 +27,30 @@ let socketTotalUsuarios = io({
     }
 })
 
-socketTotalUsuarios.on('totalUsuarios', (usuarios) => {
+let socket;
+let game;
+let activeGame;
+
+socketTotalUsuarios.on('totalUsuarios', (usuarios, game) => {
+    activeGame = game;
     let users = ''
     usuarios.forEach((usuario)=>{
         users += `<div>${usuario.name}</div>`
     })
     lobby.innerHTML = users;
     lobbyTitle.textContent = `Total de jogadores na sala - ${usuarios.length}`
+    lobbyStatusGame.textContent = game != null ?  'Jogo está em andamento...' : ''
 });
 
-let socket;
-let game;
 
 buttonsConfirmName.forEach((button)=>{
     button.addEventListener('click', () => {
         if (!usernameInput.value) {
             errorInitialName.textContent = "Você digitou um nome não válido."
+            return;
+        } else if (activeGame != null) {
+            errorInitialName.textContent = "O jogo está ativo, aguarde para ingressar na próxima rodada."
+            return;
         } else {
             errorInitialName.textContent = ""
             userName.textContent = usernameInput.value
