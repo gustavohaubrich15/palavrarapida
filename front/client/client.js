@@ -218,11 +218,12 @@ const updateLives = (newGame) =>{
                 }
             }
         }
+        
     })
 }
 
 answerInputClass.addEventListener('keydown', (event) => {
-    if (event.keyCode == 13 || lowwer(event.key) == 'enter') {
+    if (event.keyCode == 13 || event.key.toLowerCase() == 'enter') {
         event.preventDefault();
         socket.emit('answer-question', {
             word: event.target.value,
