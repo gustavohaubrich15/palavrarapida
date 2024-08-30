@@ -211,7 +211,7 @@ const updateLives = (newGame) =>{
             for (let i = lives.length; i > jogador.vidas; i--) {
                 const playerParent = lives[i - 1].parentNode 
                 lives[i - 1].remove();
-                //loseLiveAudio.play()
+                loseLiveAudio.play()
                 if(i == 1){
                     const deathElement = document.createElement('div');
                     deathElement.className = 'death';
