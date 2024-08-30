@@ -175,6 +175,7 @@ const disableAllPlayersThatNotAnswer = (newGame, idSocket) => {
     input.value = ''
     if(!input.disabled){
         input.focus();
+        answerInputClass.style.textDecoration = '';
     }
 }
 
@@ -205,7 +206,7 @@ const updateLives = (newGame) =>{
     const loseLiveAudio = document.querySelector('#loseLiveAudio')
     newGame.jogadores.forEach((jogador, index)=>{
         const lives = document.getElementsByClassName(`${jogador.id}lives`);
-        
+        const answerOnline = document.getElementById(`${jogador.id}onlineAnswer`);
         if (lives.length > jogador.vidas) {
             for (let i = lives.length; i > jogador.vidas; i--) {
                 const playerParent = lives[i - 1].parentNode 
@@ -217,6 +218,13 @@ const updateLives = (newGame) =>{
                     playerParent.appendChild(deathElement)
                 }
             }
+
+            answerOnline.style.textDecoration = 'line-through';
+            answerOnline.style.textDecorationThickness = '3px';
+        }
+        if(index == newGame.turnoIndexJogador){
+            answerOnline.style.textDecoration = 'none';
+            answerOnline.innerHTML = ''
         }
         
     })
