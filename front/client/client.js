@@ -222,7 +222,7 @@ const updateLives = (newGame) =>{
 }
 
 answerInputClass.addEventListener('keydown', (event) => {
-    if (event.keyCode == 13) {
+    if (event.keyCode == 13 || lowwer(event.key) == 'enter') {
         event.preventDefault();
         socket.emit('answer-question', {
             word: event.target.value,
