@@ -35,9 +35,9 @@ startedWords()
 let clients = [];
 let words = [];
 let configurations = {
-    tempo: 7,
-    vidas: 2,
-    minJogadores: 3,
+    tempo: 15,
+    vidas: 4,
+    minJogadores: 2,
     jogoAtivo: true
 };
 let timer = null;
@@ -67,7 +67,7 @@ io.on('connection', (socket) => {
     startGame()
     
     //Recebendo mensagens do cliente
-    socket.on('answer-question', (answer, callback) => {
+    socket.on('answer-question', (answer) => {
         if(verifyCorrectAnswer(answer, socket.id)){
             const randomWord = getTwoSyllableWord(words);
             answer.game.silaba = randomWord;
@@ -77,9 +77,7 @@ io.on('connection', (socket) => {
                 io.emit('next-turn-player-game', answer.game)
             }
         }else{
-            callback({
-                wrongAnswer: true
-            });
+            io.emit('wrong-answer', socket.id)
         }
     });
 

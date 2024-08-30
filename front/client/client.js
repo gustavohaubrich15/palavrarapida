@@ -149,6 +149,14 @@ const socketEvents = () => {
         arrowDirection(newGame)
     });
 
+    socket.on('wrong-answer',(socketId)=>{
+        const playerElement = document.getElementById(`${socketId}onlineAnswer`).parentNode;
+        playerElement.classList.add('shake');
+        setTimeout(() => {
+            playerElement.classList.remove('shake');
+        }, 500); 
+    })
+
     socket.on('next-turn-player-game', (newGame) => {
         updateLives(newGame)
         game = newGame
@@ -236,15 +244,6 @@ answerInputClass.addEventListener('keydown', (event) => {
         socket.emit('answer-question', {
             word: event.target.value,
             game: game
-        },(response) => {
-            if (response.wrongAnswer) {
-                const playerElement = document.getElementById(`${socket.id}onlineAnswer`).parentNode;
-                playerElement.classList.add('shake');
-
-                setTimeout(() => {
-                    playerElement.classList.remove('shake');
-                }, 500); 
-            } 
         });
     }
 });
