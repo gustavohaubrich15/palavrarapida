@@ -251,7 +251,7 @@ const updateAnswerPlayer = (answerLive) => {
     const answerInputClass = document.getElementById(`${answerLive.idSocket}onlineAnswer`);
     if (answerInputClass) {
         const silaba = game.silaba;
-        const userInput = answerLive.typing;
+        const userInput = lower(answerLive.typing);
         const silabaIndex = userInput.indexOf(silaba);
 
         if (silabaIndex !== -1) {
