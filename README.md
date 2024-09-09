@@ -14,11 +14,21 @@
 * [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) - Frontend - Estilização CSS
 * [Socket.io](https://socket.io/pt-br/) - WebSocket
 * [NodeJS](https://nodejs.org/en) - Backend
-  
-![image](https://github.com/user-attachments/assets/a52c9259-fa35-474f-ae75-ad1d910ddcc1)
 
+## Página do administrador
+ - Possibilita a configuração do jogo e início da partida.
+![image](https://github.com/user-attachments/assets/ceb4be0a-9a73-43d0-b349-3dc27dd488be)
 
 * [Acesse aqui a aplicação do administrador do jogo](https://palavrarapida.onrender.com/admin/)
+
+## Página do administrador
+ - Entrada do jogador na partida, contendo lobby, após a partida com seus adversários que entrarem na sala pelo mesmo link.
+ - 
+![image](https://github.com/user-attachments/assets/85a60e05-27d2-4132-8730-a177c72504e2)
+
+![image](https://github.com/user-attachments/assets/260a91d9-b392-48bc-86ba-4ca62545ec8b)
+
+![image](https://github.com/user-attachments/assets/6d0f57c2-1712-4993-be50-952476d93bb1)
 
 * [Acesse aqui a aplicação dos usuários](https://palavrarapida.onrender.com/client/)
 
