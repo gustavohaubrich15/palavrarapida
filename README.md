@@ -23,7 +23,7 @@
 * [Acesse aqui a aplicação do administrador do jogo](https://palavrarapida.onrender.com/admin/)
 
 ## Página do administrador
- - Entrada do jogador na partida, contendo lobby, após a partida com seus adversários que entrarem na sala pelo mesmo link.
+ - Entrada do jogador na partida, contendo lobby. Após o acesso a partida iniciará quando houver o mínimo de jogadores na sala, configurado pelo administrador e que o jogo esteja ativo.
    
 ![image](https://github.com/user-attachments/assets/85a60e05-27d2-4132-8730-a177c72504e2)
 
