@@ -1,7 +1,7 @@
 # Palavras Rápidas - Web Mobile
 
 
-&nbsp;
+&nbsp; 
 > Jogo de construção de palavras usando socket io.
 > Diversos usuários podem conectar na partida, ganha a última pessoa que ainda possui vidas. 
 > O Jogo é baseado em uma lista de palavras do dicionário, onde deve ser enviado uma palavra por turno do jogador contendo a sílaba aleatória mostrada. 
