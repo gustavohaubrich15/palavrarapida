@@ -4,9 +4,9 @@ body {
     align-items: center;
     flex-direction: column;
     margin:0;
-    background-color: aquamarine;
+    background-color: #52B5E9;
     font-family: "New Amsterdam", sans-serif;
-    font-weight: 400;
+    font-weight: 300;
     font-style: normal;
     width: 100%;
     height: 100vh;
